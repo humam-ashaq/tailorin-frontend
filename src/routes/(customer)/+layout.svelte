@@ -1,12 +1,6 @@
 <script lang="ts">
-	import favicon from '$lib/assets/favicon.svg';
-
 	let { children } = $props(); // Syntax baru Svelte 5 untuk mengambil konten halaman
 </script>
-
-<svelte:head>
-	<link rel="icon" href="{favicon}" />
-</svelte:head>
 
 <div class="min-h-screen flex flex-col font-sans text-gray-900 bg-gray-50">
 	<nav class="bg-white shadow-sm sticky top-0 z-50">
