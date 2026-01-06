@@ -147,9 +147,10 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {#each group.data as customer}
-            <div
-              class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:border-t-blue/30 transition group cursor-pointer relative overflow-hidden"
-            >
+            <a 
+            href="/admin/measurements/{customer.id}"
+            class="block bg-white p-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:border-t-blue/30 transition group cursor-pointer relative overflow-hidden"
+        >
               <div
                 class="absolute -right-4 -top-4 w-12 h-12 bg-gray-50 rounded-full group-hover:bg-yellow-50 transition"
               ></div>
@@ -190,7 +191,7 @@
                   <ChevronRight size={16} />
                 </span>
               </div>
-            </div>
+            </a>
           {/each}
         </div>
       </div>
