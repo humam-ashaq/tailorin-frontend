@@ -6,7 +6,6 @@
 		LayoutDashboard, 
 		Scissors, 
 		Ruler, 
-		History, 
 		Wand2, 
 		LogOut,
 		Search,
@@ -19,10 +18,9 @@
 
 	const menus = [
 		{ name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-		{ name: 'Daftar Pesanan', href: '/admin/orders', icon: Scissors },
-		{ name: 'Daftar Ukuran', href: '/admin/measurements', icon: Ruler },
-		{ name: 'Riwayat', href: '/admin/history', icon: History },
-		{ name: 'Rekomendasi AI', href: '/admin/fabric-ai', icon: Wand2 }
+		{ name: 'Data Pesanan', href: '/admin/orders', icon: Scissors },
+		{ name: 'Buku Ukuran', href: '/admin/measurements', icon: Ruler },
+		{ name: 'Rekomendasi Ukuran Kain', href: '/admin/fabric-ai', icon: Wand2 }
 	];
 </script>
 
