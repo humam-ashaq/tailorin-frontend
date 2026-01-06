@@ -57,7 +57,7 @@
 
 			<div class="flex items-center gap-3">
 				<div class="text-right hidden md:block leading-tight">
-					<p class="text-sm font-bold text-gray-800">Humam Ashaq</p>
+					<p class="text-sm font-bold text-gray-800">SS Tailor</p>
 					<p class="text-[11px] text-t-blue font-bold">Owner</p>
 				</div>
 				<div class="w-10 h-10 bg-gray-100 rounded-full border-2 border-white shadow-sm flex items-center justify-center overflow-hidden">

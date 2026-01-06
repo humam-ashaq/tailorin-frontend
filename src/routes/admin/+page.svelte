@@ -33,7 +33,7 @@
 <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-t-blue to-t-pink p-8 text-white shadow-xl mb-8">
 	<div class="relative z-10">
 		<div class="flex items-center gap-3 mb-2">
-			<h2 class="text-3xl font-bold">Halo, Admin Tailorin!</h2>
+			<h2 class="text-3xl font-bold">Halo, SS Tailor!</h2>
 			<span class="text-3xl">👋</span>
 		</div>
 		<p class="opacity-90 text-lg">Hari ini ada <span class="font-bold bg-white/20 px-2 py-0.5 rounded text-white">4 pesanan</span> yang perlu perhatianmu.</p>

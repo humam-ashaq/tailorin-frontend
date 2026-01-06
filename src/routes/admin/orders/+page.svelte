@@ -1,9 +1,9 @@
 <script lang="ts">
+  import { goto } from "$app/navigation"; // Import navigasi
   import {
     Search,
     Filter,
     Download,
-    Eye,
     Pencil,
     Trash2,
     ChevronLeft,
@@ -13,7 +13,8 @@
     XCircle,
     Clock,
     Plus,
-    AlertCircle, // Tambah icon Alert
+    AlertCircle,
+    History, // Import Icon History
   } from "lucide-svelte";
 
   // Data Dummy Pesanan Utama (Active Orders)
@@ -50,7 +51,7 @@
     },
   ];
 
-  // Data Dummy Permintaan Masuk -> HAPUS estPrice, TAMBAH requestedDeadline
+  // Data Dummy Permintaan Masuk
   let incomingRequests = [
     {
       id: "REQ-991",
@@ -60,7 +61,7 @@
       date: "Baru saja",
       model: "Custom - Lengan Lonceng",
       note: "Butuh cepat untuk minggu depan",
-      requestedDeadline: "10 Jan 2026", // Pelanggan minta tanggal ini
+      requestedDeadline: "10 Jan 2026",
     },
     {
       id: "REQ-992",
@@ -90,6 +91,11 @@
     if (s === "Menunggu Kain")
       return "bg-orange-100 text-orange-700 border border-orange-200";
     return "bg-gray-100 text-gray-700";
+  };
+
+  // Fungsi navigasi ke detail
+  const goToDetail = (id: string) => {
+    goto(`/admin/orders/${id}`);
   };
 </script>
 
@@ -133,15 +139,20 @@
       {#each tabs as tab}
         <button
           onclick={() => (activeTab = tab.id)}
-          class="relative py-4 px-2 text-sm font-medium transition-all whitespace-nowrap
-					{activeTab === tab.id
+          class="relative py-4 px-2 text-sm font-medium transition-all whitespace-nowrap flex items-center gap-2
+          {activeTab === tab.id
             ? 'text-t-blue border-b-2 border-t-blue font-bold'
             : 'text-gray-500 hover:text-gray-700 border-b-2 border-transparent'}"
         >
+          {#if tab.id === "Selesai"}
+            <History size={16} />
+          {/if}
+
           {tab.label}
+
           {#if tab.count > 0}
             <span
-              class="ml-2 bg-red-500 text-white text-[10px] px-2 py-0.5 rounded-full shadow-sm"
+              class="ml-1 bg-red-500 text-white text-[10px] px-2 py-0.5 rounded-full shadow-sm"
             >
               {tab.count}
             </span>
@@ -264,7 +275,10 @@
           </thead>
           <tbody class="divide-y divide-gray-50">
             {#each activeOrders as order}
-              <tr class="hover:bg-gray-50 transition group">
+              <tr
+                onclick={() => goToDetail(order.id)}
+                class="hover:bg-blue-50/30 transition group cursor-pointer"
+              >
                 <td class="px-6 py-4 font-mono text-t-blue font-medium"
                   >{order.id}</td
                 >
@@ -289,19 +303,19 @@
                   </span>
                 </td>
                 <td class="px-6 py-4 text-center">
-                  <div class="flex items-center justify-center gap-2">
+                  <!-- svelte-ignore a11y_click_events_have_key_events -->
+                  <!-- svelte-ignore a11y_no_static_element_interactions -->
+                  <div
+                    class="flex items-center justify-center gap-2"
+                    onclick={(e) => e.stopPropagation()}
+                  >
                     <button
-                      class="p-1.5 text-gray-400 hover:text-t-blue hover:bg-blue-50 rounded-lg transition"
-                      title="Lihat Detail"
+                      class="flex items-center gap-1.5 px-3 py-1.5 bg-yellow-50 text-yellow-700 hover:bg-yellow-100 hover:text-yellow-800 border border-yellow-200 rounded-lg transition text-xs font-bold shadow-sm"
+                      title="Edit Pesanan"
                     >
-                      <Eye size={18} />
+                      <Pencil size={14} /> Edit
                     </button>
-                    <button
-                      class="p-1.5 text-gray-400 hover:text-t-yellow hover:bg-yellow-50 rounded-lg transition"
-                      title="Edit"
-                    >
-                      <Pencil size={18} />
-                    </button>
+
                     <button
                       class="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition"
                       title="Hapus"

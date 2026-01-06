@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
   import {
     Search,
     Plus,
@@ -87,6 +88,10 @@
         data: groups[letter],
       }));
   });
+
+  function handleAddNew() {
+    goto("/admin/measurements/new");
+  }
 </script>
 
 <div class="space-y-6 pb-20">
@@ -101,8 +106,10 @@
             Database lengkap ukuran badan pelanggan.
           </p>
         </div>
+        <!-- svelte-ignore event_directive_deprecated -->
         <button
           class="flex items-center gap-2 px-4 py-2 bg-t-yellow text-t-dark rounded-xl hover:bg-yellow-400 transition shadow-md text-sm font-medium"
+          onclick={handleAddNew}
         >
           <Plus size={18} strokeWidth={2} /> Tambah Data Baru
         </button>
@@ -147,10 +154,10 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {#each group.data as customer}
-            <a 
-            href="/admin/measurements/{customer.id}"
-            class="block bg-white p-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:border-t-blue/30 transition group cursor-pointer relative overflow-hidden"
-        >
+            <a
+              href="/admin/measurements/{customer.id}"
+              class="block bg-white p-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:border-t-blue/30 transition group cursor-pointer relative overflow-hidden"
+            >
               <div
                 class="absolute -right-4 -top-4 w-12 h-12 bg-gray-50 rounded-full group-hover:bg-yellow-50 transition"
               ></div>
