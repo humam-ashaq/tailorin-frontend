@@ -75,7 +75,11 @@
 		<nav class="p-4 space-y-2">
 			<p class="px-4 text-[10px] font-bold text-white/60 uppercase tracking-wider mb-2 mt-4">Main Menu</p>
 			{#each menus as menu}
-				{@const isActive = $page.url.pathname === menu.href}
+				{@const isActive = 
+					menu.href === '/admin' 
+						? $page.url.pathname === '/admin' 
+						: $page.url.pathname.startsWith(menu.href)
+				}
 				<a 
 					href={menu.href} 
 					class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 font-medium text-sm
