@@ -62,6 +62,13 @@
       gender: "Pria",
       lastUpdate: "8 Jan 2026",
     },
+    {
+      id: "CUST-08",
+      name: "Yanto",
+      phone: "0813-6677-8899",
+      gender: "Pria",
+      lastUpdate: "15 Jan 2026",
+    }
   ];
 
   let searchQuery = $state("");
