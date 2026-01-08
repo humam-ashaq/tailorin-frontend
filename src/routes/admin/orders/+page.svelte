@@ -5,18 +5,21 @@
     Calendar, CheckCircle, XCircle, Clock, Plus, AlertCircle, History
   } from "lucide-svelte";
 
-  // ... (Data Dummy ActiveOrders & IncomingRequests TETAP SAMA, tidak saya tulis ulang agar hemat tempat) ...
-  let activeOrders = [
+  const statusOptions = ['Baru', 'Menunggu Kain', 'Dipotong', 'Dijahit', 'Selesai'];
+
+  // Data Dummy Pesanan
+  let activeOrders = $state([
     { id: "ORD-001", client: "Budi Santoso", phone: "0812...", item: "Kemeja Batik", date: "5 Jan", deadline: "12 Jan", price: "150.000", status: "Dipotong" },
     { id: "ORD-003", client: "Joko Anwar", phone: "0813...", item: "Jas Formal", date: "8 Jan", deadline: "15 Jan", price: "850.000", status: "Dijahit" },
     { id: "ORD-002", client: "Siti Aminah", phone: "0856...", item: "Gamis Syar'i", date: "6 Jan", deadline: "20 Jan", price: "300.000", status: "Menunggu Kain" },
-  ];
+  ]);
+
   let incomingRequests = [
     { id: "REQ-991", client: "Putri Delina", phone: "08123456789", item: "Gaun Pesta", date: "Baru saja", model: "Custom - Lengan Lonceng", note: "Butuh cepat untuk minggu depan", requestedDeadline: "10 Jan 2026" },
     { id: "REQ-992", client: "Raffi Ahmad", phone: "0811223344", item: "Kemeja Slimfit", date: "1 Jam lalu", model: "Standard", note: "Kain bawa sendiri", requestedDeadline: "Flexible" },
   ];
 
-  let activeTab = "Proses";
+  let activeTab = $state("Proses");
 
   const tabs = [
     { id: "Proses", label: "Dalam Pengerjaan", count: 0 },
@@ -31,11 +34,32 @@
     return "bg-gray-100 text-gray-700";
   };
 
-  // LOGIKA BARU: Tambahkan parameter editMode
   const goToDetail = (id: string, editMode = false) => {
     const url = `/admin/orders/${id}${editMode ? '?edit=true' : ''}`;
     goto(url);
   };
+
+  function handleStatusChange(orderIndex: number, e: Event) {
+    const target = e.target as HTMLSelectElement;
+    const newStatus = target.value;
+    const currentStatus = activeOrders[orderIndex].status;
+
+    if (newStatus === 'Selesai') {
+        const confirm = window.confirm(`Konfirmasi: Tandai pesanan ${activeOrders[orderIndex].id} sebagai SELESAI?\n\nStatus akan dikunci setelah ini.`);
+        
+        if (confirm) {
+            activeOrders[orderIndex].status = 'Selesai';
+        } else {
+            target.value = currentStatus;
+        }
+    } else {
+        activeOrders[orderIndex].status = newStatus;
+    }
+  }
+
+  function handleAddNew() {
+    goto('/admin/orders/new');
+  }
 </script>
 
 <div class="space-y-6">
@@ -50,7 +74,10 @@
           <button class="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 text-t-dark rounded-xl hover:bg-gray-50 transition shadow-sm text-sm font-medium">
             <Download size={18} /> <span class="hidden sm:inline">Export CSV</span>
           </button>
-          <button class="flex items-center gap-2 px-4 py-2 bg-t-yellow text-t-dark rounded-xl hover:bg-yellow-400 transition shadow-md text-sm font-medium">
+          <button 
+            class="flex items-center gap-2 px-4 py-2 bg-t-yellow text-t-dark rounded-xl hover:bg-yellow-400 transition shadow-md text-sm font-medium"
+            onclick={handleAddNew}
+          >
             <Plus size={18} strokeWidth={2} /> Buat Pesanan
           </button>
         </div>
@@ -113,25 +140,39 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-50">
-            {#each activeOrders as order}
+            {#each activeOrders as order, i}
               <tr onclick={() => goToDetail(order.id)} class="hover:bg-blue-50/30 transition group cursor-pointer">
                 <td class="px-6 py-4 font-mono text-t-blue font-medium">{order.id}</td>
                 <td class="px-6 py-4"><div class="font-bold text-gray-800">{order.client}</div><div class="text-xs text-gray-400">{order.phone}</div></td>
                 <td class="px-6 py-4 text-gray-600">{order.item}</td>
                 <td class="px-6 py-4"><div class="flex items-center gap-2 text-gray-600"><Calendar size={14} class="text-t-pink" /><span class="font-medium">{order.deadline}</span></div></td>
-                <td class="px-6 py-4"><span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide {statusColor(order.status)}">{order.status}</span></td>
+                
+                <td class="px-6 py-4" onclick={(e) => e.stopPropagation()}>
+                    <select 
+                        value={order.status}
+                        onchange={(e) => handleStatusChange(i, e)}
+                        disabled={order.status === 'Selesai'}
+                        class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide border outline-none {statusColor(order.status)} 
+                        {order.status === 'Selesai' ? 'cursor-not-allowed opacity-80' : 'cursor-pointer'}"
+                    >
+                        {#each statusOptions as status}
+                            <option value={status}>{status}</option>
+                        {/each}
+                    </select>
+                </td>
+
                 <td class="px-6 py-4 text-center">
                   <!-- svelte-ignore a11y_click_events_have_key_events -->
                   <!-- svelte-ignore a11y_no_static_element_interactions -->
                   <div class="flex items-center justify-center gap-2" onclick={(e) => e.stopPropagation()}>
                     
-                    <button
-                      onclick={() => goToDetail(order.id, true)} 
-                      class="flex items-center gap-1.5 px-3 py-1.5 bg-yellow-50 text-yellow-700 hover:bg-yellow-100 hover:text-yellow-800 border border-yellow-200 rounded-lg transition text-xs font-bold shadow-sm"
-                      title="Edit Pesanan"
-                    >
-                      <Pencil size={14} /> Edit
-                    </button>
+                    {#if order.status !== 'Selesai'}
+                        <button onclick={() => goToDetail(order.id, true)} class="flex items-center gap-1.5 px-3 py-1.5 bg-yellow-50 text-yellow-700 hover:bg-yellow-100 hover:text-yellow-800 border border-yellow-200 rounded-lg transition text-xs font-bold shadow-sm" title="Edit Pesanan">
+                        <Pencil size={14} /> Edit
+                        </button>
+                    {:else}
+                        <span class="text-gray-400 text-xs italic px-3 py-1.5">Locked</span>
+                    {/if}
 
                     <button class="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition" title="Hapus"><Trash2 size={18} /></button>
                   </div>

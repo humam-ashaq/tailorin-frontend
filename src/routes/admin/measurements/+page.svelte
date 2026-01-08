@@ -111,7 +111,7 @@
           class="flex items-center gap-2 px-4 py-2 bg-t-yellow text-t-dark rounded-xl hover:bg-yellow-400 transition shadow-md text-sm font-medium"
           onclick={handleAddNew}
         >
-          <Plus size={18} strokeWidth={2} /> Tambah Data Baru
+          <Plus size={18} strokeWidth={2} /> Tambah Data Ukuran
         </button>
       </div>
     </div>
