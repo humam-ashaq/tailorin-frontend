@@ -215,7 +215,7 @@
             </button>
         </div>
 
-        <div class="lg:col-span-1 space-y-6">
+        <div class="lg:col-span-1 sticky top-28 space-y-6">
             
             <div class="bg-gradient-to-r from-t-blue to-t-pink p-6 rounded-2xl text-white shadow-lg">
                 <div class="flex items-center gap-3 mb-4">
