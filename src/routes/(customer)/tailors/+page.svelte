@@ -4,6 +4,8 @@
         ChevronDown, Heart, ShieldCheck, SlidersHorizontal 
     } from 'lucide-svelte';
     import { fade, slide } from 'svelte/transition';
+    import { page } from '$app/stores'; // Import page store
+    import { onMount } from 'svelte';
 
     // --- DUMMY DATA ---
     const locations = ['Adiwerna', 'Slawi', 'Tarub', 'Tegal Kota', 'Dukuhturi', 'Margasari'];
@@ -53,6 +55,19 @@
             selectedCategories.push(cat);
         }
     }
+
+    onMount(() => {
+        // Ambil parameter 'category' dari URL
+        const categoryParam = $page.url.searchParams.get('category');
+        
+        if (categoryParam) {
+            // Jika ada, masukkan ke dalam array filter yang sudah ada
+            // Pastikan tidak duplikat
+            if (!selectedCategories.includes(categoryParam)) {
+                selectedCategories.push(categoryParam);
+            }
+        }
+    });
 </script>
 
 <div class="min-h-screen bg-[#FAFAFA] py-8">

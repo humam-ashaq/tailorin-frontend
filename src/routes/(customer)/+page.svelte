@@ -11,28 +11,32 @@
     Wand2,
   } from "lucide-svelte";
 
-  // Data Dummy Kategori
+  /// Data Dummy Kategori (Tambahkan properti 'query')
   const categories = [
     {
       name: "Busana Wanita",
+      query: "Wanita", // Keyword filter
       count: "120+ Penjahit",
       icon: "👗",
       color: "bg-pink-100 text-pink-600",
     },
     {
       name: "Pakaian Formal",
+      query: "Jas", // Keyword filter (sesuaikan dengan tag yang ada di tailors page)
       count: "85+ Penjahit",
       icon: "👔",
       color: "bg-blue-100 text-blue-600",
     },
     {
       name: "Seragam Dinas",
+      query: "Seragam",
       count: "50+ Penjahit",
       icon: "👮",
       color: "bg-orange-100 text-orange-600",
     },
     {
       name: "Busana Kasual",
+      query: "Kemeja",
       count: "200+ Penjahit",
       icon: "👕",
       color: "bg-green-100 text-green-600",
@@ -42,15 +46,17 @@
   // Data Dummy Penjahit
   const tailors = [
     {
+      id: 1,
       name: "Aldo Tailor",
       location: "Adiwerna, Tegal",
       rating: 4.9,
       reviews: 120,
       image:
-        "https://images.unsplash.com/photo-1594938298603-c8148c47e356?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+        "https://images.unsplash.com/photo-1593032465175-481ac7f401a0?w=800&q=80&auto=format&fit=crop&ixlib=rb-4.0.3",
       tags: ["Jas", "Kemeja"],
     },
     {
+      id: 2,
       name: "SS Tailor",
       location: "Tembok Lor, Tegal",
       rating: 5.0,
@@ -60,6 +66,7 @@
       tags: ["Wanita", "Kebaya"],
     },
     {
+      id: 3,
       name: "Swift Tailor",
       location: "Pangkah, Tegal",
       rating: 4.7,
@@ -69,6 +76,7 @@
       tags: ["Permak", "Kilat"],
     },
     {
+      id: 4,
       name: "Mustofa Modiste",
       location: "Tarub, Tegal",
       rating: 4.8,
@@ -120,11 +128,13 @@
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 pt-2">
-        <button
+        <a
+          href="/tailors"
           class="px-8 py-4 bg-gray-900 text-white rounded-full font-bold text-lg hover:bg-gray-800 transition shadow-xl hover:shadow-2xl hover:-translate-y-1 transform flex items-center justify-center gap-2"
         >
           Cari Penjahit <ArrowRight size={20} />
-        </button>
+        </a>
+        
         <button
           onclick={scrollToAI}
           class="px-8 py-4 bg-white text-gray-800 border border-gray-200 rounded-full font-bold text-lg hover:bg-gray-50 transition shadow-sm flex items-center justify-center gap-2"
@@ -178,7 +188,7 @@
         </p>
       </div>
       <a
-        href="/kategori"
+        href="/category"
         class="text-t-blue font-bold text-sm hover:underline flex items-center gap-1"
       >
         Lihat Semua <ArrowRight size={16} />
@@ -187,8 +197,9 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {#each categories as cat}
-        <div
-          class="group bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-t-blue transition-all cursor-pointer hover:-translate-y-1"
+        <a
+          href="/tailors?category={cat.query}"
+          class="group bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-t-blue transition-all cursor-pointer hover:-translate-y-1 block"
         >
           <div
             class="w-14 h-14 {cat.color} rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition"
@@ -197,76 +208,61 @@
           </div>
           <h3 class="font-bold text-xl text-gray-800 mb-1">{cat.name}</h3>
           <p class="text-sm text-gray-400">{cat.count}</p>
-        </div>
+        </a>
       {/each}
     </div>
   </div>
 </section>
 
 <section class="py-20">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="text-center mb-16">
-      <span class="text-t-pink font-bold text-sm tracking-widest uppercase"
-        >Mitra Pilihan</span
-      >
-      <h2 class="text-4xl font-black text-gray-900 mt-2">
-        Penjahit Terlaris Minggu Ini
-      </h2>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-      {#each tailors as tailor}
-        <div
-          class="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-lg hover:shadow-2xl transition group relative cursor-pointer hover:-translate-y-1"
-        >
-          <div class="relative h-64 overflow-hidden">
-            <img
-              src={tailor.image}
-              alt={tailor.name}
-              class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-            />
-            <div
-              class="absolute top-4 right-4 bg-white/95 backdrop-blur px-2 py-1 rounded-lg text-xs font-bold shadow-sm flex items-center gap-1"
-            >
-              <Star size={12} class="text-t-yellow fill-t-yellow" />
-              {tailor.rating}
-            </div>
-          </div>
-
-          <div class="p-6">
-            <h3 class="font-bold text-lg text-gray-800 mb-1">{tailor.name}</h3>
-            <div class="flex items-center gap-1 text-gray-400 text-sm mb-4">
-              <MapPin size={14} />
-              {tailor.location}
-            </div>
-
-            <div class="flex flex-wrap gap-2 mb-6">
-              {#each tailor.tags as tag}
-                <span
-                  class="px-2 py-1 bg-gray-50 text-gray-600 text-[10px] uppercase font-bold rounded-md border border-gray-100"
-                  >{tag}</span
-                >
-              {/each}
-            </div>
-
-            <button
-              class="w-full py-3 rounded-xl border-2 border-gray-100 text-gray-800 font-bold text-sm hover:border-gray-900 hover:bg-gray-900 hover:text-white transition"
-            >
-              Lihat Profil
-            </button>
-          </div>
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <span class="text-t-pink font-bold text-sm tracking-widest uppercase">Mitra Pilihan</span>
+            <h2 class="text-4xl font-black text-gray-900 mt-2">Penjahit Terlaris Minggu Ini</h2>
         </div>
-      {/each}
-    </div>
 
-    <div class="text-center mt-12">
-      <button
-        class="px-8 py-3 bg-white border border-gray-300 rounded-full font-bold text-gray-600 hover:bg-gray-50 transition shadow-sm"
-      >
-        Muat Lebih Banyak
-      </button>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {#each tailors as tailor}
+                <a 
+                    href="/tailors/{tailor.id}"
+                    class="block bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-lg hover:shadow-2xl transition group relative cursor-pointer hover:-translate-y-1"
+                >
+                    <div class="relative h-64 overflow-hidden">
+                        <img src={tailor.image} alt={tailor.name} class="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+                        <div class="absolute top-4 right-4 bg-white/95 backdrop-blur px-2 py-1 rounded-lg text-xs font-bold shadow-sm flex items-center gap-1">
+                            <Star size={12} class="text-t-yellow fill-t-yellow" /> {tailor.rating}
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">{tailor.name}</h3>
+                        <div class="flex items-center gap-1 text-gray-400 text-sm mb-4">
+                            <MapPin size={14} /> {tailor.location}
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            {#each tailor.tags as tag}
+                                <span class="px-2 py-1 bg-gray-50 text-gray-600 text-[10px] uppercase font-bold rounded-md border border-gray-100">{tag}</span>
+                            {/each}
+                        </div>
+
+                        <span class="block w-full text-center py-3 rounded-xl border-2 border-gray-100 text-gray-800 font-bold text-sm group-hover:border-gray-900 group-hover:bg-gray-900 group-hover:text-white transition">
+                            Lihat Profil
+                        </span>
+                    </div>
+                </a>
+            {/each}
+        </div>
+        
+        <div class="text-center mt-12">
+            <a 
+                href="/tailors"
+                class="inline-block px-8 py-3 bg-white border border-gray-300 rounded-full font-bold text-gray-600 hover:bg-gray-50 transition shadow-sm"
+            >
+                Muat Lebih Banyak
+            </a>
+        </div>
     </div>
-  </div>
 </section>
 
 <section id="ai-section" class="py-20 px-6">

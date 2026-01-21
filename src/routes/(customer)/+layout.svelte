@@ -29,10 +29,10 @@
                         <Search class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                         <input type="text" placeholder="Cari penjahit..." class="pl-10 pr-4 py-2 bg-gray-50 border-none rounded-full text-sm focus:ring-2 focus:ring-t-blue/30 transition w-48 lg:w-64" />
                     </div>
-                    <button class="p-2 text-gray-500 hover:text-t-blue transition relative">
+                    <a href="/orders" class="p-2 text-gray-500 hover:text-t-blue transition relative">
                         <ShoppingBag size={22} />
                         <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                    </button>
+                    </a>
                     <a href="/login" class="px-5 py-2 rounded-full bg-gradient-to-r from-t-blue to-t-pink text-white font-bold text-sm hover:bg-gray-800 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                         Masuk
                     </a>
