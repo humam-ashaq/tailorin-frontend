@@ -33,9 +33,9 @@
                         <ShoppingBag size={22} />
                         <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                     </button>
-                    <button class="px-5 py-2 rounded-full bg-gradient-to-r from-t-blue to-t-pink text-white font-bold text-sm hover:bg-gray-800 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                    <a href="/login" class="px-5 py-2 rounded-full bg-gradient-to-r from-t-blue to-t-pink text-white font-bold text-sm hover:bg-gray-800 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                         Masuk
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -71,9 +71,9 @@
             <div>
                 <h4 class="font-bold mb-4 text-lg">Layanan</h4>
                 <ul class="space-y-2 text-sm text-gray-400">
-                    <li><a href="#" class="hover:text-white transition">Cari Penjahit</a></li>
-                    <li><a href="#" class="hover:text-white transition">AI Rekomendasi Ukuran Kain</a></li>
-                    <li><a href="#" class="hover:text-white transition">Daftar sebagai Mitra</a></li>
+                    <li><a href="/tailors" class="hover:text-white transition">Cari Penjahit</a></li>
+                    <li><a href="/fabric-ai" class="hover:text-white transition">AI Rekomendasi Ukuran Kain</a></li>
+                    <li><a href="/register?role=tailor" class="hover:text-white transition">Daftar sebagai Mitra</a></li>
                 </ul>
             </div>
 
