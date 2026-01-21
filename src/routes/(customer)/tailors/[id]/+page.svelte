@@ -249,9 +249,12 @@
                         {/if}
 
                         <div class="space-y-3">
-                            <button class="w-full py-4 bg-gradient-to-r from-t-blue to-t-pink text-white rounded-xl font-bold hover:shadow-lg hover:scale-[1.02] transition active:scale-95 shadow-md">
+                            <a 
+                                href="/tailors/{tailor.id}/order"
+                                class="block w-full text-center py-4 bg-gradient-to-r from-t-blue to-t-pink text-white rounded-xl font-bold hover:shadow-lg hover:scale-[1.02] transition active:scale-95 shadow-md"
+                            >
                                 Buat Pesanan
-                            </button>
+                            </a>
                             <button class="w-full py-4 bg-white border-2 border-gray-200 text-gray-700 rounded-xl font-bold hover:border-gray-900 hover:text-gray-900 transition flex items-center justify-center gap-2">
                                 <MessageCircle size={18}/> Chat Penjahit
                             </button>
