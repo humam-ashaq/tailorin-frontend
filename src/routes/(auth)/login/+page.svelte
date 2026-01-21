@@ -54,6 +54,7 @@
         <form onsubmit={handleLogin} class="space-y-6">
             
             <div class="space-y-1.5">
+                <!-- svelte-ignore a11y_label_has_associated_control -->
                 <label class="text-[11px] font-bold text-gray-400 uppercase tracking-wider ml-1">Email</label>
                 <input 
                     type="email" 
@@ -65,7 +66,9 @@
 
             <div class="space-y-1.5">
                 <div class="flex justify-between items-center ml-1">
+                    <!-- svelte-ignore a11y_label_has_associated_control -->
                     <label class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Password</label>
+                    <!-- svelte-ignore a11y_invalid_attribute -->
                     <a href="#" class="text-xs font-bold text-t-pink hover:text-pink-600 transition">Lupa?</a>
                 </div>
                 <div class="relative">

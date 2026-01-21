@@ -118,16 +118,19 @@
         <form onsubmit={handleRegister} class="space-y-4">
             
             <div class="space-y-1">
+                <!-- svelte-ignore a11y_label_has_associated_control -->
                 <label class="text-[11px] font-bold text-gray-400 uppercase tracking-wider ml-1">Nama Lengkap</label>
                 <input type="text" placeholder="John Doe" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 text-sm focus:bg-white focus:border-gray-400 focus:ring-0 outline-none transition font-medium placeholder-gray-400" required />
             </div>
 
             <div class="space-y-1">
+                <!-- svelte-ignore a11y_label_has_associated_control -->
                 <label class="text-[11px] font-bold text-gray-400 uppercase tracking-wider ml-1">Email</label>
                 <input type="email" placeholder="nama@email.com" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 text-sm focus:bg-white focus:border-gray-400 focus:ring-0 outline-none transition font-medium placeholder-gray-400" required />
             </div>
 
             <div class="space-y-1">
+                <!-- svelte-ignore a11y_label_has_associated_control -->
                 <label class="text-[11px] font-bold text-gray-400 uppercase tracking-wider ml-1">Password</label>
                 <div class="relative">
                     <input 

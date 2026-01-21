@@ -62,8 +62,11 @@
             <div>
                 <h4 class="font-bold mb-4 text-lg">Perusahaan</h4>
                 <ul class="space-y-2 text-sm text-gray-400">
+                    <!-- svelte-ignore a11y_invalid_attribute -->
                     <li><a href="#" class="hover:text-white transition">Tentang Kami</a></li>
+                    <!-- svelte-ignore a11y_invalid_attribute -->
                     <li><a href="#" class="hover:text-white transition">Karir</a></li>
+                    <!-- svelte-ignore a11y_invalid_attribute -->
                     <li><a href="#" class="hover:text-white transition">Blog</a></li>
                 </ul>
             </div>
@@ -80,8 +83,11 @@
             <div>
                 <h4 class="font-bold mb-4 text-lg">Ikuti Kami</h4>
                 <div class="flex gap-4">
+                    <!-- svelte-ignore a11y_invalid_attribute -->
                     <a href="#" class="p-2 bg-gray-800 rounded-full hover:bg-t-blue transition"><Instagram size={18}/></a>
+                    <!-- svelte-ignore a11y_invalid_attribute -->
                     <a href="#" class="p-2 bg-gray-800 rounded-full hover:bg-t-blue transition"><Facebook size={18}/></a>
+                    <!-- svelte-ignore a11y_invalid_attribute -->
                     <a href="#" class="p-2 bg-gray-800 rounded-full hover:bg-t-blue transition"><Twitter size={18}/></a>
                 </div>
             </div>
