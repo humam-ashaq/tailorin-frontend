@@ -11,65 +11,10 @@
     MoreVertical,
   } from "lucide-svelte";
 
+  import { globalStore } from "$lib/store.svelte";
+
   // Data Dummy (Stats disembunyikan dari view kartu)
-  let customers = [
-    {
-      id: "CUST-01",
-      name: "Andi Saputra",
-      phone: "0812-3456-7890",
-      gender: "Pria",
-      lastUpdate: "5 Jan 2026",
-    },
-    {
-      id: "CUST-02",
-      name: "Anisa Rahma",
-      phone: "0856-7890-1234",
-      gender: "Wanita",
-      lastUpdate: "20 Des 2025",
-    },
-    {
-      id: "CUST-03",
-      name: "Budi Santoso",
-      phone: "0813-4567-8901",
-      gender: "Pria",
-      lastUpdate: "10 Jan 2026",
-    },
-    {
-      id: "CUST-04",
-      name: "Citra Kirana",
-      phone: "0877-1234-5678",
-      gender: "Wanita",
-      lastUpdate: "1 Jan 2026",
-    },
-    {
-      id: "CUST-05",
-      name: "Dewi Persik",
-      phone: "0811-2233-4455",
-      gender: "Wanita",
-      lastUpdate: "12 Jan 2026",
-    },
-    {
-      id: "CUST-06",
-      name: "Doni Salmanan",
-      phone: "0812-9988-7766",
-      gender: "Pria",
-      lastUpdate: "30 Nov 2025",
-    },
-    {
-      id: "CUST-07",
-      name: "Eko Patrio",
-      phone: "0857-1122-3344",
-      gender: "Pria",
-      lastUpdate: "8 Jan 2026",
-    },
-    {
-      id: "CUST-08",
-      name: "Yanto",
-      phone: "0813-6677-8899",
-      gender: "Pria",
-      lastUpdate: "15 Jan 2026",
-    }
-  ];
+  let customers = $derived(globalStore.customers);
 
   let searchQuery = $state("");
 
@@ -78,7 +23,7 @@
     const filtered = customers.filter(
       (c) =>
         c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        c.phone.includes(searchQuery)
+        c.phone.includes(searchQuery),
     );
 
     const groups: Record<string, typeof customers> = {};

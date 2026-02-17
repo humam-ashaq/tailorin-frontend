@@ -21,6 +21,8 @@
   import { fade, scale } from "svelte/transition";
   import { onMount } from "svelte";
 
+  import { globalStore } from "$lib/store.svelte";
+
   const statusOptions = [
     "Baru",
     "Menunggu Kain",
@@ -29,63 +31,9 @@
     "Selesai",
   ];
 
-  // Data Dummy Pesanan Aktif
-  let activeOrders = $state([
-    {
-      id: "ORD-001",
-      client: "Budi Santoso",
-      phone: "0812...",
-      item: "Kemeja Batik",
-      date: "5 Jan",
-      deadline: "12 Jan",
-      price: "150.000",
-      status: "Dipotong",
-    },
-    {
-      id: "ORD-003",
-      client: "Joko Anwar",
-      phone: "0813...",
-      item: "Jas Formal",
-      date: "8 Jan",
-      deadline: "15 Jan",
-      price: "850.000",
-      status: "Dijahit",
-    },
-    {
-      id: "ORD-002",
-      client: "Siti Aminah",
-      phone: "0856...",
-      item: "Gamis Syar'i",
-      date: "6 Jan",
-      deadline: "20 Jan",
-      price: "300.000",
-      status: "Menunggu Kain",
-    },
-  ]);
-
-  // Data Permintaan Masuk
-  let incomingRequests = $state([
-    {
-      id: "REQ-991",
-      client: "Putri Delina",
-      phone: "08123456789",
-      item: "Gaun Pesta",
-      date: "Baru saja",
-      model: "Custom - Lengan Lonceng",
-      note: "Butuh cepat untuk minggu depan",
-      requestedDeadline: "10 Jan 2026",
-    },
-    {
-      id: "REQ-992",
-      client: "Raffi Ahmad",
-      phone: "0811223344",
-      item: "Kemeja Slimfit",
-      date: "1 Jam lalu",
-      model: "Standard",
-      note: "Kain bawa sendiri",
-      requestedDeadline: "Flexible",
-    },
-  ]);
+  // Gunakan Global Store
+  let activeOrders = $derived(globalStore.orders);
+  let incomingRequests = $derived(globalStore.requests);
 
   let activeTab = $state("Proses");
 
@@ -129,12 +77,13 @@
       );
 
       if (confirm) {
-        activeOrders[orderIndex].status = "Selesai";
+        // Update via Global Store logic directly (reactive)
+        globalStore.orders[orderIndex].status = "Selesai";
       } else {
         target.value = currentStatus;
       }
     } else {
-      activeOrders[orderIndex].status = newStatus;
+      globalStore.orders[orderIndex].status = newStatus;
     }
   }
 
@@ -160,11 +109,13 @@
     if (!modalData) return;
 
     if (modalType === "reject") {
-      // Hapus dari daftar permintaan
-      incomingRequests = incomingRequests.filter((r) => r.id !== modalData.id);
+      // Hapus dari daftar permintaan global
+      globalStore.requests = globalStore.requests.filter(
+        (r) => r.id !== modalData.id,
+      );
       alert(`Pesanan dari ${modalData.client} telah DITOLAK.`);
     } else {
-      // TERIMA: Pindahkan ke Active Orders
+      // TERIMA: Pindahkan ke Active Orders Global
       const newOrder = {
         id: modalData.id.replace("REQ", "ORD"), // Generate ID Baru
         client: modalData.client,
@@ -182,10 +133,13 @@
         status: "Baru", // Status awal
       };
 
-      // Tambah ke array Active Orders
-      activeOrders = [newOrder, ...activeOrders];
-      // Hapus dari Incoming
-      incomingRequests = incomingRequests.filter((r) => r.id !== modalData.id);
+      // Tambah ke array Active Orders Global
+      globalStore.orders = [newOrder, ...globalStore.orders];
+
+      // Hapus dari Incoming Global
+      globalStore.requests = globalStore.requests.filter(
+        (r) => r.id !== modalData.id,
+      );
 
       alert(
         `Pesanan ${modalData.client} DITERIMA dengan harga Rp ${priceInput}. Masuk ke tab 'Proses'.`,
@@ -199,7 +153,7 @@
     // (Logic sederhana: kalau incomingRequests ada isinya, kita prioritaskan tab itu biar user notice)
     if (incomingRequests.length > 0) {
       // Opsional: Bisa dibuat lebih spesifik pakai query param ?tab=requests
-      activeTab = "Permintaan Masuk";
+      // activeTab = "Permintaan Masuk";
     }
   });
 </script>
