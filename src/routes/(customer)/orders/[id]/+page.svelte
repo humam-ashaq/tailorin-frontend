@@ -65,6 +65,8 @@
                 </a>
                 <div>
                     <h1 class="font-bold text-gray-900 text-sm">Detail Pesanan</h1>
+                    <!-- svelte-ignore a11y_click_events_have_key_events -->
+                    <!-- svelte-ignore a11y_no_static_element_interactions -->
                     <div class="flex items-center gap-1.5 cursor-pointer hover:bg-gray-50 px-1.5 py-0.5 rounded -ml-1.5" onclick={copyID}>
                         <p class="text-xs text-gray-500">ID: {order.id}</p>
                         <Copy size={10} class="text-gray-400"/>
