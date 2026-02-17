@@ -94,12 +94,62 @@ const initialCustomers: Customer[] = [
     { id: "CUST-08", name: "Yanto", phone: "0813-6677-8899", gender: "Pria", lastUpdate: "15 Jan 2026" }
 ];
 
+export type Tailor = {
+    id: string;
+    name: string;
+    specialties: string[];
+    location: string;
+    rating: number;
+    image?: string;
+};
+
+// ... (Existing code)
+
+const initialTailors: Tailor[] = [
+    {
+        id: "TLR-001",
+        name: "SS Tailor",
+        specialties: ["Kemeja", "Seragam", "Jas", "Permak"],
+        location: "Lowokwaru, Malang",
+        rating: 4.8,
+    },
+    {
+        id: "TLR-002",
+        name: "Abadi Jaya",
+        specialties: ["Gamis", "Kebaya", "Busana Muslim"],
+        location: "Klojen, Malang",
+        rating: 4.5,
+    },
+    {
+        id: "TLR-003",
+        name: "Permak Kilat Bu Siti",
+        specialties: ["Permak", "Celana"],
+        location: "Blimbing, Malang",
+        rating: 4.2,
+    },
+    {
+        id: "TLR-004",
+        name: "Taylor Swift (Jahit)",
+        specialties: ["Gaun Pesta", "Dress", "Haute Couture"],
+        location: "Sukun, Malang",
+        rating: 4.9,
+    },
+    {
+        id: "TLR-005",
+        name: "Master Jas Pria",
+        specialties: ["Jas Formal", "Tuxedo", "Celana Bahan"],
+        location: "Kedungkandang, Malang",
+        rating: 4.7,
+    }
+];
+
 // Global Store State
 // Menggunakan $state() agar reaktif di seluruh aplikasi (Svelte 5)
 export const globalStore = $state({
     orders: initialOrders,
     requests: initialRequests,
     customers: initialCustomers,
+    tailors: initialTailors,
     
     // Actions / Mutators
     addOrder(order: Order) {

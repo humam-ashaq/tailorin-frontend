@@ -148,7 +148,7 @@
     <div class="flex-1 max-w-2xl px-8 relative z-50">
       <div class="relative">
         <Search
-          class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+          class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 z-30"
           size={20}
         />
         <input
@@ -365,7 +365,10 @@
 
       <div class="h-8 w-px bg-gray-200 mx-1"></div>
 
-      <div class="flex items-center gap-3">
+      <button
+        onclick={() => goto("/admin/profile")}
+        class="flex items-center gap-3 hover:bg-gray-50 px-2 py-1 rounded-lg transition text-left"
+      >
         <div class="text-right hidden md:block leading-tight">
           <p class="text-sm font-bold text-gray-800">SS Tailor</p>
           <p class="text-[11px] text-t-blue font-bold">Owner</p>
@@ -375,7 +378,7 @@
         >
           <User size={20} class="text-gray-500" />
         </div>
-      </div>
+      </button>
 
       <div class="relative ml-2">
         <button
