@@ -363,23 +363,6 @@
         {/if}
       </div>
 
-      <div class="h-8 w-px bg-gray-200 mx-1"></div>
-
-      <button
-        onclick={() => goto("/admin/profile")}
-        class="flex items-center gap-3 hover:bg-gray-50 px-2 py-1 rounded-lg transition text-left"
-      >
-        <div class="text-right hidden md:block leading-tight">
-          <p class="text-sm font-bold text-gray-800">SS Tailor</p>
-          <p class="text-[11px] text-t-blue font-bold">Owner</p>
-        </div>
-        <div
-          class="w-10 h-10 bg-gray-100 rounded-full border-2 border-white shadow-sm flex items-center justify-center overflow-hidden"
-        >
-          <User size={20} class="text-gray-500" />
-        </div>
-      </button>
-
       <div class="relative ml-2">
         <button
           onclick={toggleQuickMenu}
@@ -433,6 +416,23 @@
           </div>
         {/if}
       </div>
+
+      <div class="h-8 w-px bg-gray-200 mx-1"></div>
+
+      <button
+        onclick={() => goto("/admin/profile")}
+        class="flex items-center gap-3 hover:bg-gray-50 px-2 py-1 rounded-lg transition text-left"
+      >
+        <div class="text-right hidden md:block leading-tight">
+          <p class="text-sm font-bold text-gray-800">SS Tailor</p>
+          <p class="text-[11px] text-t-blue font-bold">Owner</p>
+        </div>
+        <div
+          class="w-10 h-10 bg-gray-100 rounded-full border-2 border-white shadow-sm flex items-center justify-center overflow-hidden"
+        >
+          <User size={20} class="text-gray-500" />
+        </div>
+      </button>
     </div>
   </header>
 

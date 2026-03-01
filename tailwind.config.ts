@@ -7,8 +7,10 @@ export default {
     extend: {
       colors: {
         // Palet Tailorin
-        't-blue': '#819CEB',   // Biru Utama
-        't-pink': '#FFA1A1',   // Pink Utama (untuk gradasi)
+        // 't-blue': '#819CEB',   // Biru Utama
+        't-blue': '#3974F4',
+        // 't-pink': '#FFA1A1',   // Pink Utama (untuk gradasi)
+        't-pink': '#F34492',
         't-yellow': '#F7D774', // Aksen (Aktif/Tombol)
         't-dark': '#1E1E1E',   // Teks Gelap
         't-gray': '#F3F4F6',   // Background

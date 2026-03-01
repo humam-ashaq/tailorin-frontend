@@ -47,7 +47,7 @@
 
   // Temp State untuk Edit Mode
   // svelte-ignore state_referenced_locally
-    let tempStore = $state<any>({ ...store });
+  let tempStore = $state<any>({ ...store });
   let tempService = $state("");
 
   function toggleEdit() {
@@ -143,7 +143,7 @@
         {:else}
           <button
             onclick={toggleEdit}
-            class="flex flex-1 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 font-bold text-t-blue shadow-lg transition hover:bg-gray-50 md:flex-none"
+            class="flex flex-1 items-center justify-center gap-2 rounded-xl bg-t-yellow px-6 py-3 font-bold text-t-dark shadow-lg transition hover:bg-yellow-400 md:flex-none"
           >
             <Pencil size={18} /> Edit Profil
           </button>
@@ -164,7 +164,12 @@
     <!-- Left Column: Store Details -->
     <div class="space-y-6 lg:col-span-2">
       <!-- Bio & Info -->
-      <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+      <div
+        class="rounded-3xl border border-gray-100 bg-white p-6 shadow-lg relative overflow-hidden"
+      >
+        <div
+          class="absolute top-0 left-0 h-2 w-full bg-gradient-to-r from-t-blue to-t-pink"
+        ></div>
         <h3
           class="mb-4 flex items-center gap-2 text-lg font-bold text-gray-800"
         >
@@ -314,7 +319,12 @@
       </div>
 
       <!-- Services -->
-      <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+      <div
+        class="rounded-3xl border border-gray-100 bg-white p-6 shadow-lg relative overflow-hidden"
+      >
+        <div
+          class="absolute top-0 left-0 h-2 w-full bg-gradient-to-r from-t-blue to-t-pink"
+        ></div>
         <h3
           class="mb-4 flex items-center gap-2 text-lg font-bold text-gray-800"
         >
@@ -361,7 +371,12 @@
 
     <!-- Right Column: Gallery -->
     <div class="space-y-6 lg:col-span-1">
-      <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+      <div
+        class="rounded-3xl border border-gray-100 bg-white p-6 shadow-lg relative overflow-hidden"
+      >
+        <div
+          class="absolute top-0 left-0 h-2 w-full bg-gradient-to-r from-t-blue to-t-pink"
+        ></div>
         <div class="mb-4 flex items-center justify-between">
           <h3 class="flex items-center gap-2 text-lg font-bold text-gray-800">
             <ImageIcon class="text-t-blue" size={20} /> Galeri

@@ -296,7 +296,7 @@
         <div class="pt-4">
           <a
             href="/fabric-ai"
-            class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-t-blue to-t-pink text-gray-900 rounded-2xl font-bold hover:brightness-110 transition shadow-lg hover:shadow-t-pink/50"
+            class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-t-blue to-t-pink text-t-white rounded-2xl font-bold hover:brightness-110 transition shadow-lg hover:shadow-t-pink/50"
           >
             <Wand2 size={20} /> Coba Sekarang Gratis
           </a>
